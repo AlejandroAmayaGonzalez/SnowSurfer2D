@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class FinishLine : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            Debug.Log("Finish Line!");
+        int layerIndex = LayerMask.NameToLayer("FinishLine");
+
+        if (other.gameObject.layer == layerIndex) {
+            Debug.Log("Finish!!");
         }
     }
 }
