@@ -56,10 +56,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D collision){
-        
         int layerIndex = LayerMask.NameToLayer("Ground");
+
         if (collision.gameObject.layer == layerIndex){
-            boostEffect.Play();
+            if (moveInput.y > 0){
+                boostEffect.Play();
+            }else if (!boostEffect.isPlaying){
+                boostEffect.Stop();
+            }
         }
     }
 
