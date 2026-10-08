@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour {
     float totalRotation; // Total rotation accumulated by the player
     int flipCount = 0; // Number of flips performed by the player
 
+    int activePowerUpsCount;
+
     void Start(){
         moveAction = InputSystem.actions.FindAction("Move");
         rb = GetComponent<Rigidbody2D>();
@@ -104,6 +106,24 @@ public class PlayerController : MonoBehaviour {
         int layerIndex = LayerMask.NameToLayer("Ground");
         if (collision.gameObject.layer == layerIndex){
             snowEffect.Stop();
+        }
+    }
+
+    public void ApplyPowerUp(PowerUpScriptableObj powerUpData){
+        activePowerUpsCount++;
+
+        if (powerUpData.PowerUpType == "Speed"){
+            baseSpeed += powerUpData.PowerUpValue;            
+            boostSpeed += powerUpData.PowerUpValue;
+        }
+    }
+
+    public void RemovePowerUp(PowerUpScriptableObj powerUpData){
+        activePowerUpsCount--;
+
+        if (activePowerUpsCount == 0){
+            baseSpeed -= powerUpData.PowerUpValue;            
+            boostSpeed -= powerUpData.PowerUpValue;
         }
     }
 }

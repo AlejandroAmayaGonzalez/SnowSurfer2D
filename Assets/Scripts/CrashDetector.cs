@@ -18,9 +18,8 @@ public class CrashDetector : MonoBehaviour {
         if (other.gameObject.layer == layerIndex){
             playerController.CanControlPlayer = false; // Disable player control
             crashEffect.Play();
+            Invoke(nameof(ReloadScene), crashDelay);
         }
-
-        Invoke(nameof(ReloadScene), crashDelay);
     }
 
     void ReloadScene(){
