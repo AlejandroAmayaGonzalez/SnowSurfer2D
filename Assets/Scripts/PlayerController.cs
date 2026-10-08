@@ -91,9 +91,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D collision){
-        int layerIndex = LayerMask.NameToLayer("Ground");
-
-        if (collision.gameObject.layer == layerIndex){
+        if (collision.gameObject.CompareTag("Ground")){
             if (moveInput.y > 0){
                 snowEffect.Play();
             }else if (!boostEffect.isPlaying){

@@ -13,11 +13,15 @@ public class CrashDetector : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        int layerIndex = LayerMask.NameToLayer("Ground");
 
-        if (other.gameObject.layer == layerIndex){
+        if (other.CompareTag("Ground") && playerController.CanControlPlayer){
             playerController.CanControlPlayer = false; // Disable player control
             crashEffect.Play();
+            Invoke(nameof(ReloadScene), crashDelay);
+        }
+
+        if (other.CompareTag("FinishLine") && playerController.CanControlPlayer){
+            playerController.CanControlPlayer = false; // Disable player control
             Invoke(nameof(ReloadScene), crashDelay);
         }
     }
