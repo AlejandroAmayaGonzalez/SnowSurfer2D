@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
     Rigidbody2D rb;
     float previousRotation; // Previous rotation of the player
     float totalRotation; // Total rotation accumulated by the player
-    int flipCount; // Number of flips performed by the player
+    int flipCount = 0; // Number of flips performed by the player
 
     void Start(){
         moveAction = InputSystem.actions.FindAction("Move");
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour {
         if (Math.Abs(totalRotation) >= 340f || totalRotation <= -340f){
             flipCount++;
 
-            scoreManager.AddScore(100);
+            scoreManager.AddScore(flipCount * 100);
 
             totalRotation = 0f; // Reset the total rotation after a flip
         }
