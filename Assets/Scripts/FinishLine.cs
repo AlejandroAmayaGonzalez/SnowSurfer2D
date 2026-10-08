@@ -9,15 +9,21 @@ public class FinishLine : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             finishEffect.Play();
-            Debug.Log("Finished!");
 
             // Delay the scene reload by 1 seconds calling the method
-            Invoke(nameof(ReloadScene), reloadDelay);
+            Invoke(nameof(NextLevel), reloadDelay);
         }
     }
 
-    void ReloadScene(){
-        // Reload the current scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    void NextLevel(){
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        PlayerPrefs.SetInt("UnlockedLevel", unlockedLevel + 1);
+        PlayerPrefs.Save();
+
+        if (unlockedLevel > 4){
+            SceneManager.LoadScene("Menu");
+        }else{
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }

@@ -1,7 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelSelectionManager : MonoBehaviour {
+
+    void Start(){
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+
+        Transform levels = transform.GetChild(0);
+
+        for (int i = 0; i < levels.childCount; i++){
+            Button levelButton = levels.GetChild(i).GetComponent<Button>();
+            levelButton.interactable = (i < unlockedLevel);
+        }
+    }
+
     public void LevelSelection(string levelName){
         switch (levelName){
             case "Level1":

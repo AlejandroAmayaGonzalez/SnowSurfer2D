@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour {
     int activePowerUpsCount;
 
     void Start(){
+        // Activate the selected character based on the index stored in PlayerPrefs
+        transform.GetChild(0).GetChild(PlayerPrefs.GetInt("SelectedCharacter")).gameObject.SetActive(true);
+
         moveAction = InputSystem.actions.FindAction("Move");
         rb = GetComponent<Rigidbody2D>();
 

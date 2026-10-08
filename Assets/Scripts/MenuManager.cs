@@ -6,7 +6,7 @@ public class MenuController : MonoBehaviour {
         SceneManager.LoadScene("SelectLevel");
     }
 
-    public void SelectCharacter(){
+    public void Characters(){
         SceneManager.LoadScene("SelectChar");
     }
 
@@ -17,5 +17,12 @@ public class MenuController : MonoBehaviour {
     public void ExitGame(){
         // Quit the application when the quit button is clicked
         Application.Quit();
+    }
+
+    public void SelectChar(int characterIndex){
+        PlayerPrefs.SetInt("SelectedCharacter", characterIndex);
+        PlayerPrefs.Save(); // Save the selected character index to PlayerPrefs
+
+        SceneManager.LoadScene("Menu");
     }
 }
